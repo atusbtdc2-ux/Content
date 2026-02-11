@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASBTDC — Share Your Success Story</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Raleway', 'Segoe UI', system-ui, sans-serif;
+    background: #FAFAF8;
+    color: #515354;
+    min-height: 100vh;
+  }
+  
+  .container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  
+  /* Progress Bar */
+  .progress-wrap { margin-bottom: 32px; }
+  .progress-meta { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .progress-label { font-size: 13px; color: #9EA2A3; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+  .progress-pct { font-size: 14px; font-weight: 700; color: #73233C; }
+  .progress-bar { height: 8px; background: #E8E8E4; border-radius: 4px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; border-radius: 4px;
+    background: linear-gradient(90deg, #73233C, #00A6CF);
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  
+  /* Card */
+  .card {
+    background: #fff; border-radius: 16px; padding: 36px 32px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+    animation: slideUp 0.4s ease-out;
+  }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  
+  .card-annotation {
+    display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 11px;
+    font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;
+    background: rgba(115,35,60,0.07); color: #73233C;
+  }
+  .card h2 { font-size: 24px; font-weight: 700; color: #003B49; line-height: 1.3; margin-bottom: 6px; }
+  .card .subtitle { font-size: 15px; color: #9EA2A3; line-height: 1.5; margin-bottom: 24px; }
+  
+  /* Inputs */
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 14px; font-weight: 600; color: #003B49; margin-bottom: 6px; }
+  .field .req { color: #73233C; }
+  .field input, .field textarea, .field select {
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 2px solid #E0E0DC;
+    font-size: 15px; font-family: inherit; transition: border-color 0.2s; outline: none;
+    background: #fff;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: #00A6CF; }
+  .field textarea { resize: vertical; }
+  .field .helper { font-size: 13px; color: #9EA2A3; margin-top: 4px; }
+  
+  /* Radio / Choice cards */
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choice {
+    padding: 14px 16px; border-radius: 10px; cursor: pointer; transition: all 0.2s;
+    border: 2px solid #E0E0DC; background: transparent; text-align: left; width: 100%;
+    font-family: inherit;
+  }
+  .choice:hover { border-color: #C0C0BC; }
+  .choice.selected { border-color: #00A6CF; background: rgba(0,166,207,0.03); }
+  .choice-inner { display: flex; align-items: center; gap: 12px; }
+  .choice-radio {
+    width: 20px; height: 20px; border-radius: 50%; border: 2px solid #C0C0BC;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: border-color 0.2s;
+  }
+  .choice.selected .choice-radio { border-color: #00A6CF; }
+  .choice-dot { width: 10px; height: 10px; border-radius: 50%; background: #00A6CF; display: none; }
+  .choice.selected .choice-dot { display: block; }
+  .choice-label { font-size: 15px; font-weight: 600; color: #003B49; }
+  .choice-desc { font-size: 13px; color: #9EA2A3; margin-top: 2px; }
+  
+  /* Content type cards */
+  .ct-card {
+    padding: 16px 18px; border-radius: 12px; cursor: pointer; transition: all 0.2s;
+    border: 2px solid #E0E0DC; background: transparent; text-align: left; width: 100%;
+    font-family: inherit;
+  }
+  .ct-card:hover { border-color: #C0C0BC; }
+  .ct-card.selected { border-color: #00A6CF; background: rgba(0,166,207,0.025); }
+  .ct-inner { display: flex; align-items: center; gap: 14px; }
+  .ct-icon { font-size: 24px; flex-shrink: 0; }
+  .ct-label { font-size: 15px; font-weight: 600; color: #003B49; }
+  .ct-desc { font-size: 13px; color: #9EA2A3; }
+  .ct-check { margin-left: auto; color: #00A6CF; font-size: 20px; display: none; }
+  .ct-card.selected .ct-check { display: block; }
+  
+  /* Checkbox */
+  .checkbox-wrap { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; padding: 12px 0; }
+  .checkbox-box {
+    width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 1px;
+    border: 2px solid #C0C0BC; background: transparent;
+    display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  }
+  .checkbox-box.checked { border-color: #73233C; background: #73233C; }
+  .checkbox-box .check { color: #fff; font-size: 14px; font-weight: 700; display: none; }
+  .checkbox-box.checked .check { display: block; }
+  .checkbox-label { font-size: 14px; color: #515354; line-height: 1.5; }
+  
+  /* Buttons */
+  .btn-row { display: flex; justify-content: space-between; margin-top: 28px; gap: 12px; }
+  .btn {
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+    border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+    font-family: inherit;
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary { background: #73233C; color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: #5a1b2f; }
+  .btn-secondary { background: transparent; color: #515354; border: 2px solid #E0E0DC; }
+  .btn-secondary:hover { border-color: #C0C0BC; }
+  .btn-teal { background: #00A6CF; color: #fff; flex: 1; justify-content: center; }
+  .btn-teal:hover:not(:disabled) { background: #0090b5; }
+  
+  /* Info boxes */
+  .info-box {
+    padding: 10px 14px; border-radius: 8px; font-size: 13px; margin-top: 8px; line-height: 1.5;
+  }
+  .info-teal { background: rgba(0,166,207,0.05); border: 1px solid rgba(0,166,207,0.15); color: #003B49; }
+  .info-warn { background: rgba(115,35,60,0.04); border: 1px solid rgba(115,35,60,0.12); color: #73233C; }
+  
+  /* Release box */
+  .release-box {
+    background: #F8F6F4; border-radius: 12px; padding: 20px; margin-bottom: 24px;
+    border: 1px solid #E8E6E2; font-size: 14px; color: #515354; line-height: 1.7;
+  }
+  .release-box .release-title { font-weight: 600; color: #003B49; margin-bottom: 12px; }
+  .release-box ul { margin: 0 0 12px; padding-left: 20px; }
+  .release-box li { margin-bottom: 4px; }
+  
+  /* Photo upload zone */
+  .photo-zone {
+    padding: 16px; border-radius: 12px; border: 2px dashed #D0D0CC; margin-bottom: 16px;
+    background: #FAFAF8;
+  }
+  .photo-zone-title { font-size: 15px; font-weight: 600; color: #003B49; margin-bottom: 4px; }
+  .photo-zone-req { color: #73233C; font-size: 12px; }
+  .photo-zone-desc { font-size: 13px; color: #9EA2A3; margin-bottom: 10px; }
+  
+  /* Review */
+  .review-row {
+    display: flex; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid #F0F0EC;
+  }
+  .review-row:last-child { border-bottom: none; }
+  .review-label { font-size: 13px; font-weight: 600; color: #9EA2A3; width: 140px; flex-shrink: 0; }
+  .review-value { font-size: 14px; color: #003B49; line-height: 1.5; }
+  
+  /* Done */
+  .done-wrap { text-align: center; animation: slideUp 0.5s ease-out; padding: 60px 20px; }
+  .done-emoji { font-size: 64px; margin-bottom: 16px; }
+  .done-title { font-size: 28px; font-weight: 800; color: #003B49; margin-bottom: 12px; }
+  .done-text { font-size: 16px; color: #515354; line-height: 1.6; margin-bottom: 24px; max-width: 460px; margin-left: auto; margin-right: auto; }
+  .done-box {
+    padding: 16px; border-radius: 12px; background: #fff; border: 1px solid #E0E0DC;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04); text-align: left; max-width: 400px; margin: 0 auto;
+  }
+  .done-box-title { font-size: 13px; color: #9EA2A3; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .done-box-item { font-size: 14px; color: #515354; line-height: 1.7; }
+  
+  /* Staff panel */
+  .staff-toggle {
+    position: fixed; top: 12px; right: 12px; z-index: 100; padding: 8px 14px; border-radius: 8px;
+    background: #003B49; color: #fff; font-size: 12px; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15); letter-spacing: 0.5px; border: none; font-family: inherit;
+  }
+  .staff-panel {
+    position: fixed; top: 12px; right: 12px; z-index: 100; background: #fff; border-radius: 12px;
+    padding: 20px; width: 280px; box-shadow: 0 4px 24px rgba(0,0,0,0.12), 0 0 0 1px rgba(0,0,0,0.05);
+  }
+  .staff-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .staff-panel-title { font-size: 13px; font-weight: 700; color: #003B49; letter-spacing: 1px; text-transform: uppercase; }
+  .staff-panel-close { cursor: pointer; color: #9EA2A3; font-size: 18px; background: none; border: none; }
+  .staff-panel-note { font-size: 12px; color: #9EA2A3; margin-bottom: 10px; }
+  .staff-panel select {
+    width: 100%; padding: 10px 12px; border-radius: 8px; border: 2px solid #E0E0DC;
+    font-size: 14px; font-family: inherit; background: #fff; color: #003B49;
+  }
+
+  /* Spinner */
+  .spinner { display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Responsive */
+  @media (max-width: 500px) {
+    .card { padding: 24px 18px; }
+    .container { padding: 24px 12px; }
+    .btn { padding: 12px 18px; font-size: 14px; }
+    .card h2 { font-size: 20px; }
+    .review-row { flex-direction: column; gap: 2px; }
+    .review-label { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+// ═══════════════════════════════════════
+// ASBTDC Content Collection Form
+// Deployable Version with Make.com Webhook
+// ═══════════════════════════════════════
+
+const WEBHOOK_URL = 'https://hook.us2.make.com/47lkpppvlc7okpr2lvc4xmwr2d1enjt2';
+
+const CENTERS = [
+  'Arkansas Tech University (ATU)',
+  'Arkansas State University (ASU)',
+  'Southern Arkansas University (SAU)',
+  'Univ. of Arkansas, Fayetteville (UAF)',
+  'ASU Mid-South (ASUMS)',
+  'Univ. of Arkansas – Fort Smith (UAFS)',
+  'Univ. of Arkansas at Monticello (UAM)',
+  'Lead Center (UALR)',
+];
+
+const CONTENT_TYPES = [
+  { id: 'full_story', label: 'Full Client Story', desc: 'Detailed challenge → ASBTDC help → outcome narrative', icon: '📖' },
+  { id: 'spotlight', label: 'Short Spotlight', desc: 'Quick 2–4 sentence win or milestone', icon: '⚡' },
+  { id: 'quote', label: 'Standalone Quote', desc: 'A single compelling quote about ASBTDC', icon: '💬' },
+  { id: 'photo', label: 'Photos Only', desc: 'Business sign, owner, and promotional photos', icon: '📷' },
+  { id: 'story_quote_photo', label: 'Story + Quote + Photos', desc: 'The full package — story, quote, and photos', icon: '🎯' },
+  { id: 'spotlight_quote_photo', label: 'Spotlight + Quote + Photos', desc: 'Quick spotlight with quote and photos', icon: '✨' },
+];
+
+// ═══ STATE ═══
+const state = {
+  step: 'welcome',
+  staffPanelOpen: false,
+  submitting: false,
+  center: '',
+  filler: '',
+  releaseAgreed: false,
+  releaseName: '',
+  releaseDate: new Date().toISOString().split('T')[0],
+  name: '',
+  business: '',
+  email: '',
+  contentType: '',
+  challenge: '',
+  howHelped: '',
+  outcome: '',
+  tellOthers: '',
+  spotlightWin: '',
+  spotlightRole: '',
+  quote: '',
+  photoSignUrl: '',
+  photoOwnerUrl: '',
+  photoPromoUrl: '',
+  photoCaptionSign: '',
+  photoCaptionOwner: '',
+  photoCaptionPromo: '',
+  photoCredit: '',
+  socialConsent: '',
+  socialLinks: '',
+};
+
+function hasStory() { return ['full_story','story_quote_photo'].includes(state.contentType); }
+function hasSpotlight() { return ['spotlight','spotlight_quote_photo'].includes(state.contentType); }
+function hasQuote() { return ['quote','full_story','story_quote_photo','spotlight_quote_photo'].includes(state.contentType); }
+function hasPhotos() { return ['photo','story_quote_photo','spotlight_quote_photo'].includes(state.contentType); }
+
+function getStepSequence() {
+  const seq = ['welcome','release','client_info','content_type'];
+  if (hasStory()) seq.push('story');
+  if (hasSpotlight()) seq.push('spotlight');
+  if (hasQuote() && !hasStory()) seq.push('quote');
+  if (hasPhotos()) seq.push('photos','social_photos');
+  seq.push('review');
+  return seq;
+}
+
+function goNext() {
+  const seq = getStepSequence();
+  const i = seq.indexOf(state.step);
+  if (i < seq.length - 1) { state.step = seq[i + 1]; render(); }
+}
+
+function goBack() {
+  const seq = getStepSequence();
+  const i = seq.indexOf(state.step);
+  if (i > 0) { state.step = seq[i - 1]; render(); }
+}
+
+function getProgress() {
+  const seq = getStepSequence();
+  const i = seq.indexOf(state.step);
+  return Math.round((i / (seq.length - 1)) * 100);
+}
+
+// ═══ SUBMIT ═══
+async function submitForm() {
+  state.submitting = true;
+  render();
+  
+  const payload = {
+    timestamp: new Date().toISOString(),
+    filler_type: state.filler,
+    release_agreed: state.releaseAgreed,
+    release_name: state.releaseName,
+    release_date: state.releaseDate,
+    client_name: state.name,
+    business_name: state.business,
+    client_email: state.email,
+    content_type: state.contentType,
+    center: state.center || 'Not assigned',
+    challenge: state.challenge,
+    how_helped: state.howHelped,
+    outcome: state.outcome,
+    tell_others: state.tellOthers,
+    spotlight_win: state.spotlightWin,
+    spotlight_role: state.spotlightRole,
+    quote: state.quote,
+    photo_sign_url: state.photoSignUrl,
+    photo_owner_url: state.photoOwnerUrl,
+    photo_promo_url: state.photoPromoUrl,
+    photo_caption_sign: state.photoCaptionSign,
+    photo_caption_owner: state.photoCaptionOwner,
+    photo_caption_promo: state.photoCaptionPromo,
+    photo_credit: state.photoCredit,
+    social_media_consent: state.socialConsent === 'yes',
+    social_media_links: state.socialLinks,
+  };
+  
+  try {
+    await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    state.step = 'done';
+  } catch (err) {
+    alert('Something went wrong submitting the form. Please try again or contact ASBTDC.');
+    console.error(err);
+  }
+  
+  state.submitting = false;
+  render();
+}
+
+// ═══ RENDER HELPERS ═══
+function h(tag, attrs, ...children) {
+  const el = document.createElement(tag);
+  if (attrs) {
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === 'className') el.className = v;
+      else if (k === 'style' && typeof v === 'object') Object.assign(el.style, v);
+      else if (k.startsWith('on')) el.addEventListener(k.slice(2).toLowerCase(), v);
+      else if (k === 'disabled' && v) el.setAttribute('disabled', '');
+      else if (k === 'selected' && v) el.selected = true;
+      else el.setAttribute(k, v);
+    }
+  }
+  for (const c of children.flat()) {
+    if (c == null) continue;
+    el.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+  }
+  return el;
+}
+
+function progressBar() {
+  const pct = getProgress();
+  return h('div', {className:'progress-wrap'},
+    h('div', {className:'progress-meta'},
+      h('span', {className:'progress-label'}, 'Progress'),
+      h('span', {className:'progress-pct'}, pct + '%'),
+    ),
+    h('div', {className:'progress-bar'},
+      h('div', {className:'progress-fill', style:{width: pct+'%'}}),
+    ),
+  );
+}
+
+function card(annotation, title, subtitle, ...children) {
+  const els = [];
+  if (annotation) els.push(h('div', {className:'card-annotation'}, annotation));
+  if (title) els.push(h('h2', null, title));
+  if (subtitle) els.push(h('p', {className:'subtitle'}, subtitle));
+  els.push(...children.flat());
+  return h('div', {className:'card'}, ...els);
+}
+
+function field(label, key, opts = {}) {
+  const { required, type, placeholder, rows, helper } = opts;
+  const id = 'f_' + key;
+  const lbl = h('label', {for: id},
+    label, required ? h('span', {className:'req'}, ' *') : null
+  );
+  let input;
+  if (rows) {
+    input = h('textarea', {
+      id, rows: String(rows), placeholder: placeholder || '',
+      value: state[key] || '',
+      onInput: (e) => { state[key] = e.target.value; }
+    });
+    input.value = state[key] || '';
+  } else {
+    input = h('input', {
+      id, type: type || 'text', placeholder: placeholder || '',
+      value: state[key] || '',
+      onInput: (e) => { state[key] = e.target.value; }
+    });
+    input.value = state[key] || '';
+  }
+  const children = [lbl, input];
+  if (helper) children.push(h('div', {className:'helper'}, helper));
+  return h('div', {className:'field'}, ...children);
+}
+
+function choiceGroup(label, key, options) {
+  const lbl = h('div', {style:{fontSize:'14px',fontWeight:'600',color:'#003B49',marginBottom:'10px'}}, label);
+  const choices = options.map(opt =>
+    h('button', {
+      className: 'choice' + (state[key] === opt.value ? ' selected' : ''),
+      onClick: () => { state[key] = opt.value; render(); }
+    },
+      h('div', {className:'choice-inner'},
+        h('div', {className:'choice-radio'},
+          h('div', {className:'choice-dot'}),
+        ),
+        h('div', null,
+          h('div', {className:'choice-label'}, opt.label),
+          opt.desc ? h('div', {className:'choice-desc'}, opt.desc) : null,
+        ),
+      ),
+    )
+  );
+  return h('div', {style:{marginBottom:'20px'}}, lbl, h('div', {className:'choices'}, ...choices));
+}
+
+function btnRow(onBack, onNext, opts = {}) {
+  const { nextLabel, nextDisabled, nextClass } = opts;
+  return h('div', {className:'btn-row'},
+    onBack ? h('button', {className:'btn btn-secondary', onClick:onBack}, '← Back') : h('div'),
+    h('button', {
+      className: 'btn ' + (nextClass || 'btn-primary'),
+      onClick: nextDisabled ? null : onNext,
+      disabled: nextDisabled || false,
+    }, nextLabel || 'Continue →'),
+  );
+}
+
+function staffPanel() {
+  if (!state.staffPanelOpen) {
+    return h('button', {className:'staff-toggle', onClick:() => { state.staffPanelOpen = true; render(); }}, '⚙️ Staff Panel');
+  }
+  return h('div', {className:'staff-panel'},
+    h('div', {className:'staff-panel-header'},
+      h('span', {className:'staff-panel-title'}, '⚙️ Staff Only'),
+      h('button', {className:'staff-panel-close', onClick:() => { state.staffPanelOpen = false; render(); }}, '✕'),
+    ),
+    h('div', {className:'staff-panel-note'}, 'Not visible to clients'),
+    h('select', {
+      value: state.center,
+      onChange: (e) => { state.center = e.target.value; }
+    },
+      h('option', {value:''}, 'Select Center...'),
+      ...CENTERS.map(c => h('option', {value:c, selected: state.center===c}, c)),
+    ),
+  );
+}
+
+// ═══ RENDER ═══
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  
+  // Staff panel on every page except done
+  if (state.step !== 'done') app.appendChild(staffPanel());
+  
+  const container = h('div', {className:'container'});
+  app.appendChild(container);
+  
+  // ═══ WELCOME ═══
+  if (state.step === 'welcome') {
+    container.appendChild(
+      h('div', {style:{textAlign:'center', maxWidth:'640px', margin:'0 auto'}},
+        h('div', {style:{
+          display:'inline-block', padding:'6px 16px', borderRadius:'20px', fontSize:'12px',
+          fontWeight:'700', letterSpacing:'1.5px', textTransform:'uppercase', marginBottom:'24px',
+          background:'rgba(115,35,60,0.07)', color:'#73233C'
+        }}, 'ASBTDC'),
+        h('h1', {style:{fontSize:'36px', fontWeight:'800', color:'#003B49', marginBottom:'12px', lineHeight:'1.2'}},
+          'Share Your Success Story'),
+        h('p', {style:{fontSize:'17px', color:'#515354', lineHeight:'1.6', marginBottom:'32px', maxWidth:'500px', marginLeft:'auto', marginRight:'auto'}},
+          'Your business journey inspires other Arkansas entrepreneurs. We\'d love to share your experience — it only takes a few minutes.'),
+        choiceGroup('Who is filling this out?', 'filler', [
+          {value:'client', label:'I am the business owner / client', desc:'I\'m sharing my own story'},
+          {value:'staff', label:'I am ASBTDC staff', desc:'Entering on behalf of a client'},
+        ]),
+        btnRow(null, goNext, {nextLabel:'Let\'s Go →', nextDisabled:!state.filler}),
+      )
+    );
+    return;
+  }
+  
+  // ═══ RELEASE ═══
+  if (state.step === 'release') {
+    const valid = state.releaseAgreed && state.releaseName.trim().length > 0 && state.releaseDate;
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Step 1 — Required First',
+      'Publicity Release',
+      'Before we collect any content, we need your permission to share it. This single release covers all content types.',
+      h('div', {className:'release-box'},
+        h('p', {className:'release-title'}, 'I give permission for the Arkansas Small Business and Technology Development Center (ASBTDC) to:'),
+        h('ul', null,
+          h('li', null, 'Use my name, business name, photograph(s), quote(s), and story details'),
+          h('li', null, 'Source photos from my social media accounts (if I grant permission separately)'),
+          h('li', null, 'Publish in newsletters, website, social media, reports, presentations, and media outreach'),
+        ),
+        h('p', null, 'I understand that written stories may be edited for length and clarity, and I will review the final draft of any written story before publication. Quotes, spotlights, and photos may be used after staff review.'),
+        h('p', {style:{marginTop:'12px'}}, 'I may withdraw my permission at any time by contacting ASBTDC.'),
+      ),
+      h('div', {className:'checkbox-wrap', onClick:() => { state.releaseAgreed = !state.releaseAgreed; render(); }},
+        h('div', {className:'checkbox-box' + (state.releaseAgreed ? ' checked' : '')},
+          h('span', {className:'check'}, '✓'),
+        ),
+        h('span', {className:'checkbox-label'}, 'I agree to the Publicity Release terms above'),
+      ),
+      field('Type your full name as your signature', 'releaseName', {required:true, placeholder:'e.g., Jane Smith'}),
+      field('Today\'s date', 'releaseDate', {required:true, type:'date'}),
+      !valid ? h('div', {className:'info-box info-warn'}, '⚠️ All three fields above are required before you can continue.') : null,
+      btnRow(goBack, goNext, {nextDisabled:!valid}),
+    ));
+    return;
+  }
+  
+  // ═══ CLIENT INFO ═══
+  if (state.step === 'client_info') {
+    const valid = state.name.trim() && state.business.trim() && state.email.trim();
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Step 2',
+      'Your Information',
+      'Just the basics — we already have your details on file.',
+      field('Full Name', 'name', {required:true, placeholder:'Jane Smith'}),
+      field('Business Name', 'business', {required:true, placeholder:'Smith\'s Bakery'}),
+      field('Email Address', 'email', {required:true, type:'email', placeholder:'jane@smithsbakery.com'}),
+      h('div', {className:'info-box info-teal'}, '💡 That\'s all we need here — your other details are already in our system.'),
+      btnRow(goBack, goNext, {nextDisabled:!valid}),
+    ));
+    return;
+  }
+  
+  // ═══ CONTENT TYPE ═══
+  if (state.step === 'content_type') {
+    const typeCards = CONTENT_TYPES.map(ct =>
+      h('button', {
+        className:'ct-card' + (state.contentType === ct.id ? ' selected' : ''),
+        onClick:() => { state.contentType = ct.id; render(); }
+      },
+        h('div', {className:'ct-inner'},
+          h('span', {className:'ct-icon'}, ct.icon),
+          h('div', null,
+            h('div', {className:'ct-label'}, ct.label),
+            h('div', {className:'ct-desc'}, ct.desc),
+          ),
+          h('span', {className:'ct-check'}, '✓'),
+        ),
+      )
+    );
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Step 3',
+      'What would you like to share?',
+      'Pick what works for you — every contribution helps.',
+      h('div', {style:{display:'flex', flexDirection:'column', gap:'10px'}}, ...typeCards),
+      btnRow(goBack, goNext, {nextDisabled:!state.contentType}),
+    ));
+    return;
+  }
+  
+  // ═══ STORY ═══
+  if (state.step === 'story') {
+    const valid = state.challenge.trim() && state.howHelped.trim() && state.outcome.trim();
+    container.appendChild(progressBar());
+    const children = [
+      field('What challenge or goal brought you to ASBTDC?', 'challenge', {required:true, rows:3, placeholder:'e.g., I needed help writing a business plan to get a loan...'}),
+      field('How did ASBTDC help?', 'howHelped', {required:true, rows:3, placeholder:'e.g., My consultant helped me with market research and financial projections...'}),
+      field('What was the outcome?', 'outcome', {required:true, rows:3, placeholder:'e.g., We secured a $50,000 SBA loan and hired 3 employees...'}),
+      field('What would you tell another business owner about ASBTDC?', 'tellOthers', {rows:3, placeholder:'e.g., Don\'t try to do it alone — ASBTDC is free and they really know their stuff...'}),
+    ];
+    if (hasQuote()) {
+      children.push(h('hr', {style:{border:'none',borderTop:'1px solid #E8E6E2',margin:'8px 0 20px'}}));
+      children.push(field('In your own words, what would you say about ASBTDC? (may be used as a direct quote)', 'quote', {rows:3, placeholder:'e.g., ASBTDC gave me the confidence and the plan to take my side hustle full-time...'}));
+    }
+    children.push(btnRow(goBack, goNext, {nextDisabled:!valid}));
+    container.appendChild(progressBar());
+    // Remove duplicate progressBar
+    container.lastChild.remove();
+    container.appendChild(card('Your Story', 'Tell us about your journey', 'Don\'t worry about perfect writing — just tell it in your own words. We\'ll help shape it.', ...children));
+    return;
+  }
+  
+  // ═══ SPOTLIGHT ═══
+  if (state.step === 'spotlight') {
+    const valid = state.spotlightWin.trim() && state.spotlightRole.trim();
+    container.appendChild(progressBar());
+    const children = [
+      field('In 1–2 sentences, what\'s your win or milestone?', 'spotlightWin', {required:true, rows:3, placeholder:'e.g., We doubled our revenue in 6 months after ASBTDC helped us restructure pricing...'}),
+      field('How did ASBTDC play a role?', 'spotlightRole', {required:true, rows:3, placeholder:'e.g., My consultant showed me how to analyze my costs and set competitive prices...'}),
+    ];
+    if (hasQuote()) {
+      children.push(h('hr', {style:{border:'none',borderTop:'1px solid #E8E6E2',margin:'8px 0 20px'}}));
+      children.push(field('A quote about your ASBTDC experience (may be published)', 'quote', {rows:3, placeholder:'e.g., ASBTDC helped me see my business with fresh eyes...'}));
+    }
+    children.push(btnRow(goBack, goNext, {nextDisabled:!valid}));
+    container.appendChild(card('Quick Spotlight', 'What\'s your win?', 'Just a sentence or two — quick and easy.', ...children));
+    return;
+  }
+  
+  // ═══ QUOTE ═══
+  if (state.step === 'quote') {
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Your Quote',
+      'In your own words...',
+      'What would you say about your experience with ASBTDC? This may be published as a direct quote.',
+      field('Your quote', 'quote', {required:true, rows:5, placeholder:'"Without ASBTDC, I never would have had the confidence to open my doors. They believed in me before I believed in myself."'}),
+      h('div', {className:'info-box info-teal'}, '💡 Tip: Speak naturally — the best quotes sound like a real conversation, not a press release.'),
+      btnRow(goBack, goNext, {nextDisabled:!state.quote.trim()}),
+    ));
+    return;
+  }
+  
+  // ═══ PHOTOS ═══
+  if (state.step === 'photos') {
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Photos',
+      'Show off your business',
+      'We need at least 3 photos. Paste sharing links below (Google Drive, Dropbox, etc.), or let us pull from your social media on the next screen.',
+      h('div', {className:'photo-zone'},
+        h('div', {className:'photo-zone-title'}, '📍 Business Sign / Storefront ', h('span', {className:'photo-zone-req'}, 'Required')),
+        h('div', {className:'photo-zone-desc'}, 'Your signage, building front, or visual brand identifier'),
+        field('Paste photo link', 'photoSignUrl', {required:true, placeholder:'https://drive.google.com/...'}),
+        field('Caption: Who/what is in this photo?', 'photoCaptionSign', {placeholder:'e.g., Front entrance of Smith\'s Bakery on Main Street'}),
+      ),
+      h('div', {className:'photo-zone'},
+        h('div', {className:'photo-zone-title'}, '👤 Owner / You ', h('span', {style:{fontSize:'12px',color:'#9EA2A3'}}, 'Optional but encouraged')),
+        h('div', {className:'photo-zone-desc'}, 'Headshot or photo of you at work'),
+        field('Paste photo link', 'photoOwnerUrl', {placeholder:'https://drive.google.com/...'}),
+        field('Caption', 'photoCaptionOwner', {placeholder:'e.g., Owner Jane Smith in the bakery kitchen'}),
+      ),
+      h('div', {className:'photo-zone'},
+        h('div', {className:'photo-zone-title'}, '🌟 Something you want to promote ', h('span', {className:'photo-zone-req'}, 'Required')),
+        h('div', {className:'photo-zone-desc'}, 'Products, workspace, team, awards, community involvement — your choice'),
+        field('Paste photo link', 'photoPromoUrl', {required:true, placeholder:'https://drive.google.com/...'}),
+        field('Caption', 'photoCaptionPromo', {placeholder:'e.g., Our award-winning sourdough bread'}),
+      ),
+      field('Photo credit (if someone else took these photos)', 'photoCredit', {placeholder:'e.g., Photo by Jane Doe Photography'}),
+      btnRow(goBack, goNext),
+    ));
+    return;
+  }
+  
+  // ═══ SOCIAL PHOTOS ═══
+  if (state.step === 'social_photos') {
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Social Media Photos',
+      'Can we use photos from your social media?',
+      'This saves you time — we can pull great photos you\'ve already posted, with your permission.',
+      choiceGroup('May we use photos from your business\'s social media (Facebook, Instagram, LinkedIn)?', 'socialConsent', [
+        {value:'yes', label:'Yes — go for it!', desc:'I\'ll provide my links below'},
+        {value:'no', label:'No thanks', desc:'I\'ll only use the photos I uploaded'},
+      ]),
+      state.socialConsent === 'yes' ? field('Link(s) to your social media page(s)', 'socialLinks', {rows:2, placeholder:'e.g., facebook.com/smithsbakery, instagram.com/smithsbakery'}) : null,
+      h('div', {className:'info-box info-teal'}, '💡 This is covered by the Publicity Release you already signed. We\'ll only use photos that show your business in a positive light.'),
+      btnRow(goBack, goNext),
+    ));
+    return;
+  }
+  
+  // ═══ REVIEW ═══
+  if (state.step === 'review') {
+    const sections = [];
+    sections.push({label:'Release', value:'✅ Signed by ' + state.releaseName + ' on ' + state.releaseDate});
+    sections.push({label:'Name', value:state.name});
+    sections.push({label:'Business', value:state.business});
+    sections.push({label:'Email', value:state.email});
+    const ct = CONTENT_TYPES.find(c => c.id === state.contentType);
+    sections.push({label:'Content Type', value:ct ? ct.label : ''});
+    if (hasStory()) {
+      sections.push({label:'Challenge', value:state.challenge});
+      sections.push({label:'ASBTDC Help', value:state.howHelped});
+      sections.push({label:'Outcome', value:state.outcome});
+      if (state.tellOthers) sections.push({label:'Advice', value:state.tellOthers});
+    }
+    if (hasSpotlight()) {
+      sections.push({label:'Win', value:state.spotlightWin});
+      sections.push({label:'ASBTDC Role', value:state.spotlightRole});
+    }
+    if (state.quote) sections.push({label:'Quote', value:'"' + state.quote + '"'});
+    if (hasPhotos()) {
+      sections.push({label:'Photos', value:'Links provided'});
+      if (state.socialConsent === 'yes') sections.push({label:'Social Media', value:'✅ Approved — ' + state.socialLinks});
+    }
+    
+    const reviewRows = sections.map(s =>
+      h('div', {className:'review-row'},
+        h('span', {className:'review-label'}, s.label),
+        h('span', {className:'review-value'}, s.value),
+      )
+    );
+    
+    container.appendChild(progressBar());
+    container.appendChild(card(
+      'Final Step',
+      'Review & Submit',
+      'Take a quick look — everything correct?',
+      h('div', {style:{marginBottom:'24px'}}, ...reviewRows),
+      state.center ? h('div', {style:{padding:'8px 12px',borderRadius:'6px',background:'rgba(0,59,73,0.05)',fontSize:'12px',color:'#003B49',marginBottom:'16px'}}, '📋 Staff note: Assigned to ' + state.center) : null,
+      h('div', {style:{display:'flex',gap:'12px'}},
+        h('button', {className:'btn btn-secondary', onClick:goBack}, '← Back'),
+        h('button', {
+          className:'btn btn-teal',
+          onClick: state.submitting ? null : submitForm,
+          disabled: state.submitting,
+        }, state.submitting ? h('span', {className:'spinner'}) : 'Submit ✓'),
+      ),
+    ));
+    return;
+  }
+  
+  // ═══ DONE ═══
+  if (state.step === 'done') {
+    const items = [];
+    if (hasStory()) items.push('📝 We\'ll draft your story using your answers');
+    if (hasStory()) items.push('👀 You\'ll review the draft before anything is published');
+    if (hasSpotlight()) items.push('⚡ Our team will review your spotlight');
+    if (hasQuote()) items.push('💬 Your quote may appear in newsletters and social media');
+    if (hasPhotos()) items.push('📷 Your photos will be reviewed for marketing use');
+    items.push('📧 We\'ll be in touch at ' + state.email);
+    
+    container.appendChild(
+      h('div', {className:'done-wrap'},
+        h('div', {className:'done-emoji'}, '🎉'),
+        h('h1', {className:'done-title'}, 'Thank you, ' + state.name.split(' ')[0] + '!'),
+        h('p', {className:'done-text'},
+          hasStory() ? 'Your submission has been received. We\'ll draft your story and send it to you for review before anything is published.'
+          : 'Your submission has been received. Our team will review your contribution and may reach out if we need anything else.'),
+        h('div', {className:'done-box'},
+          h('div', {className:'done-box-title'}, 'What happens next'),
+          ...items.map(item => h('div', {className:'done-box-item'}, item)),
+        ),
+      )
+    );
+    return;
+  }
+}
+
+// ═══ INIT ═══
+render();
+</script>
+</body>
+</html>
