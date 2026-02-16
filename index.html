@@ -3,276 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASBTDC — Share Your Success Story</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Raleway','Segoe UI',system-ui,sans-serif;background:#FAFAF8;color:#515354;min-height:100vh}
-.ctr{max-width:640px;margin:0 auto;padding:40px 20px}
-.pw{margin-bottom:32px}.pm{display:flex;justify-content:space-between;margin-bottom:8px}
-.pl{font-size:13px;color:#9EA2A3;font-weight:600;letter-spacing:1px;text-transform:uppercase}
-.pp{font-size:14px;font-weight:700;color:#73233C}
-.pb{height:8px;background:#E8E8E4;border-radius:4px;overflow:hidden}
-.pf{height:100%;border-radius:4px;background:linear-gradient(90deg,#73233C,#00A6CF);transition:width .5s cubic-bezier(.4,0,.2,1)}
-.card{background:#fff;border-radius:16px;padding:36px 32px;box-shadow:0 2px 24px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.03);animation:su .4s ease-out}
-@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.ca{display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:12px;background:rgba(115,35,60,.07);color:#73233C}
-.card h2{font-size:24px;font-weight:700;color:#003B49;line-height:1.3;margin-bottom:6px}
-.card .sub{font-size:15px;color:#9EA2A3;line-height:1.5;margin-bottom:24px}
-.fld{margin-bottom:20px}.fld label{display:block;font-size:14px;font-weight:600;color:#003B49;margin-bottom:6px}
-.fld .rq{color:#73233C}
-.fld input,.fld textarea,.fld select{width:100%;padding:12px 14px;border-radius:10px;border:2px solid #E0E0DC;font-size:15px;font-family:inherit;transition:border-color .2s;outline:none;background:#fff}
-.fld input:focus,.fld textarea:focus{border-color:#00A6CF}.fld textarea{resize:vertical}
-.fld .hlp{font-size:13px;color:#9EA2A3;margin-top:4px}
-.chs{display:flex;flex-direction:column;gap:8px}
-.ch{padding:14px 16px;border-radius:10px;cursor:pointer;transition:all .2s;border:2px solid #E0E0DC;background:transparent;text-align:left;width:100%;font-family:inherit}
-.ch:hover{border-color:#C0C0BC}.ch.s{border-color:#00A6CF;background:rgba(0,166,207,.03)}
-.chi{display:flex;align-items:center;gap:12px}
-.chr{width:20px;height:20px;border-radius:50%;border:2px solid #C0C0BC;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s}
-.ch.s .chr{border-color:#00A6CF}
-.chd{width:10px;height:10px;border-radius:50%;background:#00A6CF;display:none}.ch.s .chd{display:block}
-.chl{font-size:15px;font-weight:600;color:#003B49}.chds{font-size:13px;color:#9EA2A3;margin-top:2px}
-.ct{padding:16px 18px;border-radius:12px;cursor:pointer;transition:all .2s;border:2px solid #E0E0DC;background:transparent;text-align:left;width:100%;font-family:inherit}
-.ct:hover{border-color:#C0C0BC}.ct.s{border-color:#00A6CF;background:rgba(0,166,207,.025)}
-.cti{display:flex;align-items:center;gap:14px}.ctk{font-size:24px;flex-shrink:0}
-.ctl{font-size:15px;font-weight:600;color:#003B49}.ctd{font-size:13px;color:#9EA2A3}
-.ctc{margin-left:auto;color:#00A6CF;font-size:20px;display:none}.ct.s .ctc{display:block}
-.cbw{display:flex;gap:12px;align-items:flex-start;cursor:pointer;padding:12px 0}
-.cbb{width:22px;height:22px;border-radius:6px;flex-shrink:0;margin-top:1px;border:2px solid #C0C0BC;background:transparent;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.cbb.k{border-color:#73233C;background:#73233C}.cbb .ck{color:#fff;font-size:14px;font-weight:700;display:none}.cbb.k .ck{display:block}
-.cblb{font-size:14px;color:#515354;line-height:1.5}
-.br{display:flex;justify-content:space-between;margin-top:28px;gap:12px}
-.b{padding:14px 28px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;border:none;transition:all .25s;display:inline-flex;align-items:center;gap:8px;font-family:inherit}
-.b:disabled{opacity:1;cursor:not-allowed;background:#C0B8BA!important;color:#fff!important;box-shadow:none!important;transform:none!important}
-.bp{background:#73233C;color:#fff;box-shadow:0 3px 12px rgba(115,35,60,.35)}
-.bp:hover:not(:disabled){background:#5a1b2f;box-shadow:0 4px 16px rgba(115,35,60,.45);transform:translateY(-1px)}
-.bs{background:transparent;color:#515354;border:2px solid #E0E0DC}.bs:hover{border-color:#C0C0BC}
-.bt{background:#00A6CF;color:#fff;flex:1;justify-content:center;box-shadow:0 3px 12px rgba(0,166,207,.35)}
-.bt:hover:not(:disabled){background:#0090b5;box-shadow:0 4px 16px rgba(0,166,207,.45);transform:translateY(-1px)}
-.inf{padding:10px 14px;border-radius:8px;font-size:13px;margin-top:8px;line-height:1.5}
-.it{background:rgba(0,166,207,.05);border:1px solid rgba(0,166,207,.15);color:#003B49}
-.iw{background:rgba(115,35,60,.04);border:1px solid rgba(115,35,60,.12);color:#73233C}
-.rb{background:#F8F6F4;border-radius:12px;padding:20px;margin-bottom:24px;border:1px solid #E8E6E2;font-size:14px;color:#515354;line-height:1.7}
-.rb .rt{font-weight:600;color:#003B49;margin-bottom:12px}.rb ul{margin:0 0 12px;padding-left:20px}.rb li{margin-bottom:4px}
-.pz{padding:16px;border-radius:12px;border:2px dashed #D0D0CC;margin-bottom:16px;background:#FAFAF8}
-.pzt{font-size:15px;font-weight:600;color:#003B49;margin-bottom:4px}.pzr{color:#73233C;font-size:12px}
-.pzd{font-size:13px;color:#9EA2A3;margin-bottom:10px}
-.rr{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #F0F0EC}.rr:last-child{border-bottom:none}
-.rl{font-size:13px;font-weight:600;color:#9EA2A3;width:140px;flex-shrink:0}.rv{font-size:14px;color:#003B49;line-height:1.5}
-.dw{text-align:center;animation:su .5s ease-out;padding:60px 20px}
-.de{font-size:64px;margin-bottom:16px}.dt{font-size:28px;font-weight:800;color:#003B49;margin-bottom:12px}
-.dx{font-size:16px;color:#515354;line-height:1.6;margin-bottom:24px;max-width:460px;margin-left:auto;margin-right:auto}
-.db{padding:16px;border-radius:12px;background:#fff;border:1px solid #E0E0DC;box-shadow:0 2px 12px rgba(0,0,0,.04);text-align:left;max-width:400px;margin:0 auto}
-.dbt{font-size:13px;color:#9EA2A3;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.dbi{font-size:14px;color:#515354;line-height:1.7}
-.spin{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-radius:50%;border-top-color:#fff;animation:sp .8s linear infinite}
-@keyframes sp{to{transform:rotate(360deg)}}
-@media(max-width:500px){.card{padding:24px 18px}.ctr{padding:24px 12px}.b{padding:12px 18px;font-size:14px}.card h2{font-size:20px}.rr{flex-direction:column;gap:2px}.rl{width:auto}}
-</style>
+<title>Publicity Release Confirmation</title>
 </head>
-<body>
-<div id="app"></div>
-<script>
-var WH='https://hook.us2.make.com/47lkpppvlc7okpr2lvc4xmwr2d1enjt2';
-var TY=[{id:'full_story',l:'Full Client Story',d:'Detailed challenge → ASBTDC help → outcome',i:'📖'},{id:'spotlight',l:'Short Spotlight',d:'Quick 2–4 sentence win or milestone',i:'⚡'},{id:'quote',l:'Standalone Quote',d:'A single compelling quote about ASBTDC',i:'💬'},{id:'photo',l:'Photos Only',d:'Business sign, owner, and promotional photos',i:'📷'},{id:'story_quote_photo',l:'Story + Quote + Photos',d:'The full package',i:'🎯'},{id:'spotlight_quote_photo',l:'Spotlight + Quote + Photos',d:'Quick spotlight with quote and photos',i:'✨'}];
-var S={step:'welcome',sub:false,ra:false,rn:'',rd:new Date().toISOString().split('T')[0],nm:'',biz:'',em:'',ct:'',ch:'',hh:'',oc:'',to:'',sw:'',sr:'',qt:'',ps:'',cs:'',pc:'',sc:'',sl:'',pe:''};
-var hs=function(){return['full_story','story_quote_photo'].indexOf(S.ct)>=0};
-var hsp=function(){return['spotlight','spotlight_quote_photo'].indexOf(S.ct)>=0};
-var hq=function(){return['quote','full_story','story_quote_photo','spotlight_quote_photo'].indexOf(S.ct)>=0};
-var hp=function(){return['photo','story_quote_photo','spotlight_quote_photo'].indexOf(S.ct)>=0};
-function stp(){var s=['welcome','release','info','ctype'];if(hs())s.push('story');if(hsp())s.push('spot');if(hq()&&!hs())s.push('quote');if(hp()){s.push('photos')}s.push('review');return s}
-function go(d){var s=stp(),i=s.indexOf(S.step)+d;if(i>=0&&i<s.length){S.step=s[i];R()}}
-function pct(){var s=stp(),i=s.indexOf(S.step);return Math.round(i/(s.length-1)*100)}
-async function submit(){S.sub=true;R();try{await fetch(WH,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({timestamp:new Date().toISOString(),release_agreed:S.ra,release_name:S.rn,release_date:S.rd,client_name:S.nm,business_name:S.biz,client_email:S.em,content_type:S.ct,challenge:S.ch,how_helped:S.hh,outcome:S.oc,tell_others:S.to,spotlight_win:S.sw,spotlight_role:S.sr,quote:S.qt,photo_sign_url:S.ps,photo_caption_sign:S.cs,photo_credit:S.pc,social_media_consent:S.sc==='yes',social_media_links:S.sl,photos_via_email:S.pe==='yes'})});S.step='done'}catch(e){alert('Something went wrong. Please try again.')}S.sub=false;R()}
+<body style="margin:0;padding:0;background-color:#FAFAF8;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#FAFAF8;">
+<tr><td align="center" style="padding:40px 16px;">
+<table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
 
-var _vf=null;
-function lc(){var b=document.getElementById('nb');if(!b||!_vf)return;if(_vf())b.removeAttribute('disabled');else b.setAttribute('disabled','')}
-function e(t,a){var n=document.createElement(t);if(a)for(var k in a){var v=a[k];if(k==='c')n.className=v;else if(k==='s'&&typeof v==='object')Object.assign(n.style,v);else if(k.charAt(0)==='o'&&k.charAt(1)==='n')n.addEventListener(k.slice(2).toLowerCase(),v);else if(k==='disabled'){if(v)n.setAttribute('disabled','')}else if(k==='selected'&&v)n.selected=true;else n.setAttribute(k,v)}for(var i=2;i<arguments.length;i++){var c=arguments[i];if(c==null)continue;if(Array.isArray(c))c.forEach(function(x){if(x!=null)n.appendChild(typeof x==='string'?document.createTextNode(x):x)});else n.appendChild(typeof c==='string'?document.createTextNode(c):c)}return n}
+<!-- Header -->
+<tr><td align="center" style="padding:0 0 24px;">
+<img src="https://atusbtdc2-ux.github.io/Content/asbtdc--bubbles-logo-stacked_120x120.jpg" alt="ASBTDC" width="100" style="display:block;width:100px;height:auto;">
+</td></tr>
 
-function prg(){var p=pct();return e('div',{c:'pw'},e('div',{c:'pm'},e('span',{c:'pl'},'Progress'),e('span',{c:'pp'},p+'%')),e('div',{c:'pb'},e('div',{c:'pf',s:{width:p+'%'}})))}
-function crd(){var a=arguments,ch=[];for(var i=0;i<a.length;i++)if(a[i])ch.push(a[i]);return e('div',{c:'card'},ch)}
-function fld(lb,k,o){o=o||{};var l=e('label',{for:'f_'+k},lb);if(o.req)l.appendChild(e('span',{c:'rq'},' *'));var inp;if(o.rows){inp=e('textarea',{id:'f_'+k,rows:String(o.rows),placeholder:o.ph||'',onInput:function(ev){S[k]=ev.target.value;lc()}});inp.value=S[k]||''}else{inp=e('input',{id:'f_'+k,type:o.type||'text',placeholder:o.ph||'',onInput:function(ev){S[k]=ev.target.value;lc()}});inp.value=S[k]||''}var d=e('div',{c:'fld'},l,inp);if(o.hlp)d.appendChild(e('div',{c:'hlp'},o.hlp));return d}
-function cho(lb,k,opts){var l=e('div',{s:{fontSize:'14px',fontWeight:'600',color:'#003B49',marginBottom:'10px'}},lb);var bs=opts.map(function(o){return e('button',{c:'ch'+(S[k]===o.v?' s':''),type:'button',onClick:function(){S[k]=o.v;R()}},e('div',{c:'chi'},e('div',{c:'chr'},e('div',{c:'chd'})),e('div',null,e('div',{c:'chl'},o.l),o.d?e('div',{c:'chds'},o.d):null)))});return e('div',{s:{marginBottom:'20px'}},l,e('div',{c:'chs'},bs))}
-function nav(bk,o){o=o||{};_vf=o.vf||null;var nb=e('button',{c:'b '+(o.cls||'bp'),id:'nb',type:'button',onClick:function(){go(1)},disabled:o.dis||false},o.lb||'Continue →');return e('div',{c:'br'},bk?e('button',{c:'b bs',type:'button',onClick:function(){go(-1)}},'← Back'):e('div'),nb)}
-function R(){
-var app=document.getElementById('app');app.innerHTML='';_vf=null;window.scrollTo({top:0,behavior:'smooth'});
-var cn=e('div',{c:'ctr'});app.appendChild(cn);
+<!-- Title -->
+<tr><td align="center" style="padding:0 0 8px;">
+<h1 style="margin:0;font-size:24px;font-weight:700;color:#003B49;">Publicity Release Form</h1>
+</td></tr>
+<tr><td align="center" style="padding:0 0 28px;">
+<p style="margin:0;font-size:14px;color:#9EA2A3;">Confirmation of your signed release</p>
+</td></tr>
 
-if(S.step==='welcome'){
-cn.appendChild(e('div',{s:{textAlign:'center',maxWidth:'640px',margin:'0 auto'}},
-e('div',{s:{display:'inline-block',padding:'6px 16px',borderRadius:'20px',fontSize:'12px',fontWeight:'700',letterSpacing:'1.5px',textTransform:'uppercase',marginBottom:'24px',background:'rgba(115,35,60,.07)',color:'#73233C'}},'ASBTDC'),
-e('h1',{s:{fontSize:'36px',fontWeight:'800',color:'#003B49',marginBottom:'12px',lineHeight:'1.2'}},'Share Your Success Story'),
-e('p',{s:{fontSize:'17px',color:'#515354',lineHeight:'1.6',marginBottom:'32px',maxWidth:'500px',marginLeft:'auto',marginRight:'auto'}},"Your business journey inspires other Arkansas entrepreneurs. We'd love to share your experience — it only takes a few minutes."),
-nav(false,{lb:'Let\'s Go →'})
-));return}
+<!-- Release Card -->
+<tr><td>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;border:1px solid #E8E6E2;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+<tr><td style="padding:32px;">
 
-if(S.step==='release'){
-var vf=function(){return S.ra&&S.rn.trim().length>0&&S.rd};
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Step 1 — Required First'),
-e('div',{s:{textAlign:'center',marginBottom:'20px'}},
-e('img',{src:'asbtdc--bubbles-logo-stacked_120x120.jpg',alt:'Arkansas Small Business and Technology Development Center',s:{width:'120px',height:'auto'}})),
-e('h2',{s:{textAlign:'center'}},'Publicity Release Form'),
-e('p',{c:'sub',s:{textAlign:'center'}},'Before we collect any content, we need your permission to share it.'),
-e('div',{c:'rb',s:{lineHeight:'1.7',fontSize:'14px'}},
-e('p',{s:{marginBottom:'12px'}},'I give permission to the Arkansas Small Business and Technology Development Center and the U.S. Small Business Administration to use my name, business name, and information, including provided statements, business story, logos, photos, voice and/or likeness at no charge.'),
-e('p',{s:{marginBottom:'12px'}},'Use will be for non-commercial, non-profit, educational purposes to illustrate ASBTDC services or economic impact in ASBTDC, SBA and/or university publications, advertising, online media, video and/or other formats.'),
-e('p',{s:{marginBottom:'12px'}},'Permission extends to photographs, audio, and/or video of my business and its employees.'),
-e('p',null,'While I may be given the opportunity to inspect finished media that include the use of the above materials, I understand that inspection by me before use is not required.')),
-fld('Business Name','biz',{req:true,ph:"Smith's Bakery"}),
-fld('Your Name (printed)','rn',{req:true,ph:'Jane Smith'}),
-e('div',{c:'cbw',onClick:function(){S.ra=!S.ra;R()}},e('div',{c:'cbb'+(S.ra?' k':'')},e('span',{c:'ck'},'✓')),e('span',{c:'cblb'},'I agree — this serves as my electronic signature')),
-fld("Today's date",'rd',{req:true,type:'date'}),
-!vf()?e('div',{c:'inf iw'},'⚠️ All fields above are required before you can continue.'):null,
-nav(true,{dis:!vf(),vf:vf})
-));return}
+<!-- Release Text -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F8F6F4;border-radius:10px;border:1px solid #E8E6E2;">
+<tr><td style="padding:20px 24px;">
+<p style="margin:0 0 14px;font-size:14px;line-height:1.7;color:#515354;">
+I give permission to the Arkansas Small Business and Technology Development Center and the U.S. Small Business Administration to use my name, business name, and information, including provided statements, business story, logos, photos, voice and/or likeness at no charge.
+</p>
+<p style="margin:0 0 14px;font-size:14px;line-height:1.7;color:#515354;">
+Use will be for non-commercial, non-profit, educational purposes to illustrate ASBTDC services or economic impact in ASBTDC, SBA and/or university publications, advertising, online media, video and/or other formats.
+</p>
+<p style="margin:0 0 14px;font-size:14px;line-height:1.7;color:#515354;">
+Permission extends to photographs, audio, and/or video of my business and its employees.
+</p>
+<p style="margin:0;font-size:14px;line-height:1.7;color:#515354;">
+While I may be given the opportunity to inspect finished media that include the use of the above materials, I understand that inspection by me before use is not required.
+</p>
+</td></tr>
+</table>
 
-var FAKE_DOMAINS=['mailinator.com','guerrillamail.com','tempmail.com','throwaway.email','yopmail.com','sharklasers.com','guerrillamailblock.com','grr.la','discard.email','trashmail.com','10minutemail.com','temp-mail.org','fakeinbox.com','maildrop.cc','harakirimail.com','guerrillamail.info','guerrillamail.net','guerrillamail.org','spam4.me','trash-mail.com','bugmenot.com','devnull.email'];
-var FAKE_USERS=['test','fake','none','nope','asdf','qwerty','abc','xxx','no','na','null','admin','user','example','sample'];
-function vem(addr){
-if(!addr||!addr.trim())return'Email is required.';
-var a=addr.trim().toLowerCase();
-var re=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-if(!re.test(a))return'Please enter a valid email address.';
-var parts=a.split('@');var user=parts[0];var domain=parts[1];
-if(FAKE_DOMAINS.indexOf(domain)>=0)return'Please use a real email — we need to reach you.';
-if(domain==='example.com'||domain==='test.com')return'Please use your real email address.';
-if(FAKE_USERS.indexOf(user)>=0)return'That does not look like a real email — please double-check.';
-if(user.length<2)return'Please enter your full email address.';
-if(domain.split('.')[0].length<2)return'Please double-check your email domain.';
-return null}
+<!-- Signature Fields -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:28px;">
 
-if(S.step==='info'){
-var emErr=S.em.trim()?vem(S.em):null;
-var vf=function(){return S.nm.trim()&&S.biz.trim()&&S.em.trim()&&!vem(S.em)};
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Step 2'),e('h2',null,'Your Information'),e('p',{c:'sub'},'Just the basics — we already have your details on file.'),
-fld('Full Name','nm',{req:true,ph:'Jane Smith'}),
-fld('Business Name','biz',{req:true,ph:"Smith's Bakery"}),
-fld('Email Address','em',{req:true,type:'email',ph:'jane@smithsbakery.com',hlp:'A valid email is required to continue. We use it to send updates about your story.'}),
-emErr?e('div',{c:'inf iw'},'⚠️ '+emErr):S.em.trim()&&!vem(S.em)?e('div',{c:'inf it'},'✅ Looks good!'):null,
-nav(true,{dis:!vf(),vf:vf})
-));return}
+<!-- Business Name -->
+<tr><td style="padding:0 0 16px;">
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#9EA2A3;text-transform:uppercase;letter-spacing:0.8px;">Business Name</p>
+<p style="margin:0;font-size:16px;font-weight:600;color:#003B49;">{{business_name}}</p>
+</td></tr>
 
-if(S.step==='ctype'){
-var cards=TY.map(function(t){return e('button',{c:'ct'+(S.ct===t.id?' s':''),type:'button',onClick:function(){S.ct=t.id;R()}},e('div',{c:'cti'},e('span',{c:'ctk'},t.i),e('div',null,e('div',{c:'ctl'},t.l),e('div',{c:'ctd'},t.d)),e('span',{c:'ctc'},'✓')))});
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Step 3'),e('h2',null,'What would you like to share?'),e('p',{c:'sub'},'Pick what works for you — every contribution helps.'),
-e('div',{s:{display:'flex',flexDirection:'column',gap:'10px'}},cards),
-nav(true,{dis:!S.ct})
-));return}
+<!-- Divider -->
+<tr><td style="padding:0 0 16px;"><div style="border-top:1px solid #E8E6E2;"></div></td></tr>
 
-if(S.step==='story'){
-var vf=function(){return S.ch.trim()&&S.hh.trim()&&S.oc.trim()};
-var kids=[
-fld('What challenge or goal brought you to ASBTDC?','ch',{req:true,rows:3,ph:'e.g., I needed help writing a business plan...'}),
-fld('How did ASBTDC help?','hh',{req:true,rows:3,ph:'e.g., My consultant helped me with market research...'}),
-fld('What was the outcome?','oc',{req:true,rows:3,ph:'e.g., We secured a $50,000 SBA loan and hired 3 employees...'}),
-fld('What would you tell another business owner about ASBTDC?','to',{rows:3,ph:"e.g., Don't try to do it alone..."})
-];
-if(hq()){kids.push(e('hr',{s:{border:'none',borderTop:'1px solid #E8E6E2',margin:'8px 0 20px'}}));kids.push(fld('In your own words, what would you say about ASBTDC? (direct quote)','qt',{rows:3,ph:'e.g., ASBTDC gave me the confidence...'}))}
-kids.push(nav(true,{dis:!vf(),vf:vf}));
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},e('div',{c:'ca'},'Your Story'),e('h2',null,'Tell us about your journey'),e('p',{c:'sub'},"Don't worry about perfect writing — just tell it in your own words."),kids));return}
+<!-- Your Name -->
+<tr><td style="padding:0 0 16px;">
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#9EA2A3;text-transform:uppercase;letter-spacing:0.8px;">Your Name (printed)</p>
+<p style="margin:0;font-size:16px;font-weight:600;color:#003B49;">{{release_name}}</p>
+</td></tr>
 
-if(S.step==='spot'){
-var vf=function(){return S.sw.trim()&&S.sr.trim()};
-var kids=[
-fld("In 1–2 sentences, what's your win or milestone?",'sw',{req:true,rows:3,ph:'e.g., We doubled our revenue in 6 months...'}),
-fld('How did ASBTDC play a role?','sr',{req:true,rows:3,ph:'e.g., My consultant showed me how to analyze my costs...'})
-];
-if(hq()){kids.push(e('hr',{s:{border:'none',borderTop:'1px solid #E8E6E2',margin:'8px 0 20px'}}));kids.push(fld('A quote about your ASBTDC experience','qt',{rows:3,ph:'e.g., ASBTDC helped me see my business with fresh eyes...'}))}
-kids.push(nav(true,{dis:!vf(),vf:vf}));
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},e('div',{c:'ca'},'Quick Spotlight'),e('h2',null,"What's your win?"),e('p',{c:'sub'},'Just a sentence or two — quick and easy.'),kids));return}
+<!-- Divider -->
+<tr><td style="padding:0 0 16px;"><div style="border-top:1px solid #E8E6E2;"></div></td></tr>
 
-if(S.step==='quote'){
-var vf=function(){return S.qt.trim().length>0};
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Your Quote'),e('h2',null,'In your own words...'),e('p',{c:'sub'},'What would you say about your experience with ASBTDC?'),
-fld('Your quote','qt',{req:true,rows:5,ph:'"Without ASBTDC, I never would have had the confidence to open my doors."'}),
-e('div',{c:'inf it'},'💡 Tip: Speak naturally — the best quotes sound like a real conversation.'),
-nav(true,{dis:!vf(),vf:vf})
-));return}
+<!-- Electronic Signature -->
+<tr><td style="padding:0 0 16px;">
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#9EA2A3;text-transform:uppercase;letter-spacing:0.8px;">Electronic Signature</p>
+<table role="presentation" cellpadding="0" cellspacing="0"><tr>
+<td style="width:20px;height:20px;background:#73233C;border-radius:5px;text-align:center;vertical-align:middle;color:#fff;font-size:13px;font-weight:700;">✓</td>
+<td style="padding-left:10px;font-size:14px;color:#003B49;">I agree — this serves as my electronic signature</td>
+</tr></table>
+</td></tr>
 
-if(S.step==='photos'){
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Photos'),e('h2',null,'Show off your business'),e('p',{c:'sub'},'Pick whichever way is easiest — or use more than one!'),
+<!-- Divider -->
+<tr><td style="padding:0 0 16px;"><div style="border-top:1px solid #E8E6E2;"></div></td></tr>
 
-e('div',{s:{marginBottom:'24px'}},
-e('div',{s:{fontSize:'15px',fontWeight:'700',color:'#003B49',marginBottom:'6px'}},'📱 Option 1: Let us pull from your social media'),
-e('div',{s:{fontSize:'13px',color:'#9EA2A3',marginBottom:'12px',lineHeight:'1.5'}},"Already posted great photos? We'll grab them — saves you a step. (Covered by the release you signed.)"),
-cho("May we use photos from your business's social media?",'sc',[{v:'yes',l:'Yes — go for it!',d:"I'll share my links below"},{v:'no',l:'No thanks'}]),
-S.sc==='yes'?fld('Link(s) to your social media page(s)','sl',{rows:2,ph:'e.g., facebook.com/smithsbakery'}):null
-),
+<!-- Date -->
+<tr><td style="padding:0;">
+<p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#9EA2A3;text-transform:uppercase;letter-spacing:0.8px;">Date</p>
+<p style="margin:0;font-size:16px;font-weight:600;color:#003B49;">{{release_date}}</p>
+</td></tr>
 
-e('div',{s:{marginBottom:'24px',padding:'16px 18px',borderRadius:'12px',background:'rgba(0,166,207,.04)',border:'1px solid rgba(0,166,207,.12)'}},
-e('div',{s:{fontSize:'15px',fontWeight:'700',color:'#003B49',marginBottom:'6px'}},'📧 Option 2: Email us your photos'),
-e('div',{s:{fontSize:'14px',color:'#515354',lineHeight:'1.6',marginBottom:'10px'}},"After you submit this form, we'll give you a button to email your photos — just like sending a photo to a friend."),
-e('div',{c:'cbw',onClick:function(){S.pe=S.pe==='yes'?'':'yes';R()}},e('div',{c:'cbb'+(S.pe==='yes'?' k':'')},e('span',{c:'ck'},'✓')),e('span',{c:'cblb'},"I'll email my photos next"))
-),
+</table>
 
-e('div',{s:{marginBottom:'20px'}},
-e('div',{s:{fontSize:'15px',fontWeight:'700',color:'#003B49',marginBottom:'6px'}},'📎 Option 3: Paste a link'),
-e('div',{s:{fontSize:'13px',color:'#9EA2A3',marginBottom:'12px',lineHeight:'1.5'}},'Google Drive, Dropbox, iCloud — anything with a sharing link.'),
-e('div',{c:'pz'},fld('Paste photo link','ps',{ph:'https://drive.google.com/...'}),fld('Note (optional)','cs',{ph:'e.g., Our storefront sign and award-winning sourdough'}))
-),
+</td></tr>
+</table>
+</td></tr>
 
-fld('Photo credit (if someone else took these)','pc',{ph:'e.g., Photo by Jane Doe Photography'}),
-nav(true)
-));return}
+<!-- Footer Note -->
+<tr><td align="center" style="padding:24px 0 0;">
+<p style="margin:0;font-size:13px;color:#9EA2A3;line-height:1.6;">
+This is a confirmation of the publicity release you signed on {{release_date}}.<br>
+If you have any questions, contact us at <a href="mailto:atuasbtdcphotos@gmail.com" style="color:#00A6CF;text-decoration:none;">atuasbtdcphotos@gmail.com</a>.
+</p>
+</td></tr>
 
-if(S.step==='review'){
-var rw=[];
-rw.push({l:'Release',v:'✅ Signed by '+S.rn+' on '+S.rd});
-rw.push({l:'Name',v:S.nm});rw.push({l:'Business',v:S.biz});rw.push({l:'Email',v:S.em});
-var ct=TY.find(function(t){return t.id===S.ct});rw.push({l:'Content Type',v:ct?ct.l:''});
-if(hs()){rw.push({l:'Challenge',v:S.ch});rw.push({l:'ASBTDC Help',v:S.hh});rw.push({l:'Outcome',v:S.oc});if(S.to)rw.push({l:'Advice',v:S.to})}
-if(hsp()){rw.push({l:'Win',v:S.sw});rw.push({l:'ASBTDC Role',v:S.sr})}
-if(S.qt)rw.push({l:'Quote',v:'"'+S.qt+'"'});
-if(hp()){var pMethods=[];if(S.ps)pMethods.push('Link provided');if(S.pe==='yes')pMethods.push('Will email photos');if(S.sc==='yes')pMethods.push('Social media approved');rw.push({l:'Photos',v:pMethods.length?pMethods.join(' · '):'No photos yet'})}
-var rows=rw.map(function(r){return e('div',{c:'rr'},e('span',{c:'rl'},r.l),e('span',{c:'rv'},r.v))});
-cn.appendChild(prg());
-cn.appendChild(e('div',{c:'card'},
-e('div',{c:'ca'},'Final Step'),e('h2',null,'Review & Submit'),e('p',{c:'sub'},'Take a quick look — everything correct?'),
-e('div',{s:{marginBottom:'24px'}},rows),
-e('div',{s:{display:'flex',gap:'12px'}},
-e('button',{c:'b bs',type:'button',onClick:function(){go(-1)}},'← Back'),
-e('button',{c:'b bt',id:'nb',type:'button',onClick:S.sub?null:submit,disabled:S.sub},S.sub?e('span',{c:'spin'}):'Submit ✓'))
-));return}
+<tr><td align="center" style="padding:20px 0 0;">
+<p style="margin:0;font-size:11px;color:#C0C0BC;">
+Arkansas Small Business and Technology Development Center<br>
+A program of the U.S. Small Business Administration
+</p>
+</td></tr>
 
-if(S.step==='done'){
-var items=[];
-if(hs()){items.push("📝 We'll draft your story using your answers");items.push("👀 We may reach out for clarification or approval")}
-if(hsp())items.push('⚡ Our team will review your spotlight');
-if(hq())items.push('💬 Your quote may appear in newsletters and social media');
-if(hp())items.push('📷 Your photos will be reviewed for marketing use');
-items.push('📧 We\'ll be in touch at '+S.em);
-
-var emailBtn=null;
-if(hp()&&S.pe==='yes'){
-var subj=encodeURIComponent('Photos — '+(S.biz||'My Business'));
-var body=encodeURIComponent('Hi ASBTDC team!\n\nHere are my photos for the success story.\n\nBusiness: '+(S.biz||'')+'\nName: '+(S.nm||'')+'\n\nPhotos we need:\n• Business sign / storefront\n• Something to promote (products, team, workspace, awards)\n• Any other photos you\'d like us to consider\n\nPlease attach your photos to this email. Thanks!');
-var mailto='mailto:asbtdc@atu.edu?subject='+subj+'&body='+body;
-emailBtn=e('div',{s:{marginTop:'24px',textAlign:'center'}},
-e('a',{href:mailto,s:{display:'inline-block',padding:'16px 32px',borderRadius:'10px',background:'#73233C',color:'#fff',fontSize:'16px',fontWeight:'700',textDecoration:'none',fontFamily:'inherit',boxShadow:'0 3px 12px rgba(115,35,60,.35)',transition:'all .25s'},onMouseover:function(){this.style.background='#5a1b2f';this.style.transform='translateY(-1px)'},onMouseout:function(){this.style.background='#73233C';this.style.transform='translateY(0)'}},'📷 Email My Photos Now'),
-e('div',{s:{fontSize:'13px',color:'#9EA2A3',marginTop:'8px'}},'Opens your email app with everything pre-filled'))
-}
-
-cn.appendChild(e('div',{c:'dw'},
-e('div',{c:'de'},'🎉'),
-e('h1',{c:'dt'},'Thank you, '+S.nm.split(' ')[0]+'!'),
-e('p',{c:'dx'},hs()?"Your submission has been received. We'll draft your story and may reach out if we need anything else.":"Your submission has been received. Our team will review your contribution and may reach out if we need anything else."),
-emailBtn,
-e('div',{c:'db'},e('div',{c:'dbt'},'What happens next'),items.map(function(i){return e('div',{c:'dbi'},i)}))
-));return}
-}
-R();
-</script>
+</table>
+</td></tr>
+</table>
 </body>
 </html>
